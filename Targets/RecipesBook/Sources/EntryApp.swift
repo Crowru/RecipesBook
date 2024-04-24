@@ -32,21 +32,21 @@ struct ContentApp: View {
         /// для дебага SwiftUI
         let _ = Self._printChanges()
         
-        Text("Hello theme!!!")
-            .foregroundColor(.label.primary)
-            .padding()
-            .background(Color.background.primary)
-        
-        Button("Just change current theme") {
-            if themeManager.currentThemeType == .light {
-                themeManager.currentThemeType = .dark
-            } else {
-                themeManager.currentThemeType = .light
-            }
-        }
+//        Text("Hello theme!!!")
+//            .foregroundColor(.label.primary)
+//            .padding()
+//            .background(Color.background.primary)
+//        
+//        Button("Just change current theme") {
+//            if themeManager.currentThemeType == .light {
+//                themeManager.currentThemeType = .dark
+//            } else {
+//                themeManager.currentThemeType = .light
+//            }
+//        }
         
         TabView {
-            Text("tabView.home")
+            SearchResultsUI()
                 .badge(7)
                 .tabItem { Label("tabView.home", systemImage: "house") }
             Text("tabView.cart")
