@@ -14,18 +14,37 @@ struct EntryApp: App {
     /// поможет работать с AppDelegate
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
     
+    @ObservedObject private var themeManager = ThemeManager.shared
+    
     var body: some Scene {
         WindowGroup {
             ContentApp()
+                .environmentObject(themeManager)
         }
     }
 }
 
 struct ContentApp: View {
     
-    //@Environment(\.locale) private var locale
-    
+    @EnvironmentObject private var themeManager: ThemeManager
+        
     var body: some View {
+        /// для дебага SwiftUI
+        let _ = Self._printChanges()
+        
+        Text("Hello theme!!!")
+            .foregroundColor(.label.primary)
+            .padding()
+            .background(Color.background.primary)
+        
+        Button("Just change current theme") {
+            if themeManager.currentThemeType == .light {
+                themeManager.currentThemeType = .dark
+            } else {
+                themeManager.currentThemeType = .light
+            }
+        }
+        
         TabView {
             Text("tabView.home")
                 .badge(7)
@@ -42,65 +61,11 @@ struct ContentApp: View {
                 .tabItem { Label("tabView.profile", systemImage: "person.fill") }
 
         }
-        .tint(.red)
+        .tint(.label.secondary)
     }
 }
 
 #Preview {
     ContentApp()
-}
-
-
-
-
-
-
-
-struct ContenApp: View {
-    
-    @Environment(\.locale) var locale
-    
-    var body: some View {
-        
-        VStack {
-            HStack {
-                Button {
-                } label: {
-                    Label("", systemImage: "line.3.horizontal")
-                        .foregroundColor(.black.opacity(0.6))
-                }
-                
-                Spacer()
-    
-                Text("Mohammadpur, Dhaka")
-                    .foregroundColor(.black.opacity(0.6))
-                
-                Spacer()
-                
-                Color.gray.opacity(0.3)
-                    .frame(width: 42, height: 42)
-                    .clipShape(Circle())
-                
-            }
-            
-        }.padding(.leading, 25) .padding(.trailing, 25)
-        
-        TabView {
-            Text("tabView.home")
-                .badge(7)
-                .tabItem { Label("tabView.home", systemImage: "house") }
-            Text("tabView.cart")
-                .badge(17)
-                .tabItem { Label("tabView.cart", systemImage: "basket.fill") }
-            Text("tabView.bookmarks")
-                .badge(2)
-                .tabItem { Label("tabView.bookmarks", systemImage: "bookmark") }
-
-            Text("tabView.profile")
-                .badge(3)
-                .tabItem { Label("tabView.profile", systemImage: "person.fill") }
-
-        }
-        .accentColor(.red)
-    }
+        .environmentObject(ThemeManager.shared)
 }
