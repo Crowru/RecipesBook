@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LightTheme: Theme {
     let colors: Colors = LightColors()
+    let fonts: Fonts = FontsImp()
 }
 
 struct LightColors: Colors {

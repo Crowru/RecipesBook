@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         RecipesBookKit.hello()
         RecipesBookUI.hello()
         
+        CustomFontManager.registerCustomFonts()
+        
         ThemeManager.shared.themes = [
             .light: ThemeStorage.light,
             .dark: ThemeStorage.dark
