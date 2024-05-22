@@ -29,3 +29,4 @@ struct DarkLabelColors: LabelColors {
     let secondary: Color = .green.opacity(0.5)
     let tertiary: Color = .gray.opacity(0.8)
 }
+

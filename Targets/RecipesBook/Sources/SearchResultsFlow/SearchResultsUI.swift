@@ -198,6 +198,5 @@ private extension SearchResultsUI {
 //        .foregroundColor(.black)
 //        .rotationEffect(.degrees(180))
 //    }
-//    
 //}
 //
