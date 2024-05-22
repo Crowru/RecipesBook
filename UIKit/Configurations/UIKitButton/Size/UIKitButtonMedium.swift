@@ -10,7 +10,8 @@ import Foundation
 
 struct UIKitButtonMedium: UIKitButtonSize {
     let height: CGFloat = 32
-    let imageSize: CGSize = CGSize(width: 12, height: 12)
+    let imageSize: CGSize = CGSize(width: 18, height: 18)
+    let horizontalContentInset: CGFloat = 12
 }
 
 extension UIKitButtonSize where Self == UIKitButtonMedium {

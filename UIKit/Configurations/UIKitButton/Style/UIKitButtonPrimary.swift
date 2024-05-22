@@ -25,22 +25,22 @@ private struct UIKitButtonPrimaryDefault: UIKitButtonAppearence {
 private struct UIKitButtonPrimaryEnabled: UIKitButtonAppearence {
     let font: Font = .title
     let weight: Font.Weight = .regular
-    let foregroundColor: Color = .label.primary.opacity(0.9)
-    let backgroundColor: Color = .background.primary.opacity(0.9)
+    let foregroundColor: Color = .label.primary
+    let backgroundColor: Color = .background.primary
 }
 
 private struct UIKitButtonPrimaryPressed: UIKitButtonAppearence {
     let font: Font = .title
     let weight: Font.Weight = .regular
-    let foregroundColor: Color = .label.primary.opacity(0.4)
-    let backgroundColor: Color = .background.primary.opacity(0.4)
+    let foregroundColor: Color = .label.secondary
+    let backgroundColor: Color = .background.secondary
 }
 
 private struct UIKitButtonPrimaryDisabled: UIKitButtonAppearence {
     let font: Font = .title
     let weight: Font.Weight = .regular
-    let foregroundColor: Color = .black.opacity(0.7)
-    let backgroundColor: Color = .gray
+    let foregroundColor: Color = .label.tertiary
+    let backgroundColor: Color = .background.ghost // todo
 }
 
 extension UIKitButtonType where Self == UIKitButtonPrimary {

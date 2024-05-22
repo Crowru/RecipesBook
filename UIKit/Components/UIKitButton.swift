@@ -13,6 +13,7 @@ import SwiftUI
 protocol UIKitButtonSize {
     var height: CGFloat { get }
     var imageSize: CGSize { get }
+    var horizontalContentInset: CGFloat { get }
 }
 
 // MARK: - UIKitButtonAppearence
@@ -34,6 +35,18 @@ protocol UIKitButtonType {
     var disabled: UIKitButtonAppearence { get }
 }
 
+// MARK: - UIKitButtonImage
+
+struct UIKitButtonImage {
+    var imageName: String // FIXME - Replace String with component
+    var alignment: Alignment
+    
+    enum Alignment {
+        case leading
+        case trailing
+    }
+}
+
 // MARK: - UIKitButtonState
 
 enum UIKitButtonState {
@@ -48,7 +61,7 @@ enum UIKitButtonState {
 struct UIKitButton: View {
     private let title: String
     private let isExpanded: Bool
-    private let imageName: String?
+    private let image: UIKitButtonImage?
     private let size: UIKitButtonSize
     private let type: UIKitButtonType
     private let state: UIKitButtonState
@@ -75,7 +88,7 @@ struct UIKitButton: View {
     init(
         title: String,
         isExpanded: Bool,
-        imageName: String? = nil,
+        image: UIKitButtonImage? = nil,
         size: UIKitButtonSize = .medium,
         type: UIKitButtonType = .primary,
         state: UIKitButtonState = .default,
@@ -83,7 +96,7 @@ struct UIKitButton: View {
     ) {
         self.title = title
         self.isExpanded = isExpanded
-        self.imageName = imageName
+        self.image = image
         self.size = size
         self.type = type
         self.state = state
@@ -96,11 +109,18 @@ struct UIKitButton: View {
 private extension UIKitButton {
     
     var content: some View {
-        HStack {
-            image
+        HStack(spacing: 8) {
+            if image?.alignment == .leading {
+                imageContent
+            }
+            
             text
+            
+            if image?.alignment == .trailing {
+                imageContent
+            }
         }
-        .padding(.horizontal, 8)
+        .padding(size.horizontalContentInset)
     }
 }
 
@@ -128,14 +148,14 @@ private extension UIKitButton {
     }
 }
 
-// MARK: - Image
+// MARK: - Image Content
 
 private extension UIKitButton {
     
-    @ViewBuilder
-    var image: some View {
-        if let imageName {
-            Image(systemName: imageName)
+    @ViewBuilder /// нужен для того чтобы переварить опционал
+    var imageContent: some View {
+        if let image {
+            Image(systemName: image.imageName)
                 .frame(
                     width: size.imageSize.width,
                     height: size.imageSize.height
@@ -202,38 +222,52 @@ extension View {
     }
 }
 
+// MARK: - #Preview
 
-// MARK: - Prewie
 #Preview {
-    VStack {
-        UIKitButton(
-            title: "Конфигурация №1",
-            isExpanded: false,
-            size: .large,
-            type: .primary,
-            state: .disabled
-        ) {
-            print("Hello cofig 1")
-        }
-        .padding()
-
-        UIKitButton(
-            title: "Конфиг #2", 
-            isExpanded: true,
-            imageName: "eraser.fill"
-        ) {
-            print("Hello cofig 2")
-        }
-        .padding()
+    ZStack {
+        /// Test backround
+        Color.blue.opacity(0.5)
+            .ignoresSafeArea()
+        ///
         
-        UIKitButton(
-            title: "Конфиг #3",
-            isExpanded: false,
-            imageName: "eraser.fill"
-        ) {
-            print("Hello cofig 2")
+        VStack {
+            UIKitButton(
+                title: "Конфигурация №1",
+                isExpanded: false,
+                size: .large,
+                type: .primary,
+                state: .disabled
+            ) {
+                print("Hello cofig 1")
+            }
+            .padding()
+            
+            
+            UIKitButton(
+                title: "Конфиг #2",
+                isExpanded: false,
+                image: UIKitButtonImage(imageName: "eraser.fill", alignment: .trailing),
+                size: .medium
+            ) {
+                print("Hello cofig 2")
+            }
+            .padding()
+            
+            UIKitButton(
+                title: "Конфиг #3",
+                isExpanded: false,
+                image: UIKitButtonImage(
+                    imageName: "eraser.fill",
+                    alignment: .leading
+                ),
+                size: .small
+            ) {
+                print("Hello cofig 3")
+            }
+            .padding()
+            
         }
-        .padding()
+        //.preferredColorScheme(.dark)
     }
-    //.preferredColorScheme(.dark)
 }
