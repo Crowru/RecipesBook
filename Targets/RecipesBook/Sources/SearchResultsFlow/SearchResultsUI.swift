@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+// MARK: - SearchResultsUI
+
 struct SearchResultsUI: View {
     
     private let historyData: [String] = ["My search history", "My favourite recipes", "Easy Mexican Casserole", "Thai Chicken Balls", "Honey Mustard Pork Chops", "My search history", "My favourite recipes", "Easy Mexican Casserole", "Thai Chicken Balls", "Honey Mustard Pork Chops", "My search history", "My favourite recipes", "Easy Mexican Casserole", "Thai Chicken Balls", "Honey Mustard Pork Chops"]
@@ -20,8 +22,11 @@ struct SearchResultsUI: View {
                 search
                     //.border(.red)
             }
+            .background(Color.white)
         //}
     }
+    
+    // MARK: - Search
     
     var search: some View {
         ScrollView(showsIndicators: false) {
@@ -61,7 +66,7 @@ struct SearchResultsUI: View {
                 .opacity(isDividerExist ? 1 : 0)
         }
         .padding(.horizontal, 35)
-        .foregroundStyle(.gray)
+        .foregroundStyle(Color.label.secondary)
     }
 }
 
@@ -80,7 +85,7 @@ private extension SearchResultsUI {
             }
             .padding(.horizontal, 20)
         }
-        .background(Color.green)
+        
 //        .overlay(alignment: .bottom) {
 //            Rectangle()
 //                .frame(height: 48)
@@ -116,7 +121,7 @@ private extension SearchResultsUI {
             .resizable()
             .scaledToFit()
             .frame(width: 20, height: 14)
-            .foregroundStyle(.white)
+            .foregroundStyle(Color.label.primary)
     }
     
     var helpTooltip: some View {
@@ -125,13 +130,16 @@ private extension SearchResultsUI {
             helpTooltipImage
         }
         .padding(8)
-        .background(.white.opacity(0.7), in: .rect(cornerRadius: 20))
+        .background(
+            Color.background.primary.opacity(0.7),
+            in: .rect(cornerRadius: 20)
+        )
         .padding(.leading, 10)
     }
     
     var helpTooltipTitle: some View {
         Text("Swipe to search by ingredients")
-            .foregroundStyle(Color.black.opacity(0.8))
+            .foregroundStyle(Color.label.primary)
             .font(.caption2)
     }
     
@@ -140,6 +148,7 @@ private extension SearchResultsUI {
             .resizable()
             .scaledToFit()
             .frame(width: 10, height: 8)
+            .foregroundStyle(Color.label.primary)
     }
 }
 
@@ -198,6 +207,5 @@ private extension SearchResultsUI {
 //        .foregroundColor(.black)
 //        .rotationEffect(.degrees(180))
 //    }
-//    
 //}
 //

@@ -19,13 +19,15 @@ struct DarkColors: Colors {
 }
 
 struct DarkBackgroundColors: BackgroundColors {
-    let primary: Color = .blue
-    let secondary: Color = .blue.opacity(0.5)
-    let ghost: Color = .gray.opacity(0.5)
+    let primary: Color = .white
+    let secondary: Color = .secondary
+    let ghost: Color = .gray
+    let tertiary: Color = .gray.opacity(0.2)
 }
 
 struct DarkLabelColors: LabelColors {
-    let primary: Color = .green
-    let secondary: Color = .green.opacity(0.5)
-    let tertiary: Color = .gray.opacity(0.8)
+    let primary: Color = .primary
+    let secondary: Color = .secondary 
+    let tertiary: Color = Color(uiColor: UIColor.lightGray)
 }
+

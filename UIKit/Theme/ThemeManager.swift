@@ -23,6 +23,7 @@ final class ThemeManager: ObservableObject {
     private init(
         themes: [ThemeTypes: Theme] = [:],
         currentThemeType: ThemeTypes = .light
+        /// поменять тему
     ) {
         self.themes = themes
         self.currentThemeType = currentThemeType
